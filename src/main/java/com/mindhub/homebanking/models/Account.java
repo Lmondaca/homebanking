@@ -1,6 +1,5 @@
 package com.mindhub.homebanking.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import org.hibernate.annotations.GenericGenerator;
@@ -9,7 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
+//Cuenta de Ahorro
 @Entity
 public class Account {
     @Id
@@ -24,7 +23,7 @@ public class Account {
     private Client client;
 
     @OneToMany(mappedBy="account", fetch=FetchType.EAGER)
-    private Set<Transaction> transactions = new HashSet<>();;
+    private Set<Transaction> transactions = new HashSet<>();
 
 
     public Account() {
