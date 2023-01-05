@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @RepositoryRestResource
 public interface CoordinatesRepository extends JpaRepository<Coordinates, Long> {
-    Optional<Coordinates> findById(Long id);
+
 }

@@ -19,8 +19,6 @@ public class Card {
     private LocalDateTime fromDate;
     private LocalDateTime thruDate;
 
-    private Coordinates coordinates;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
     private Client client;
@@ -108,13 +106,5 @@ public class Card {
 
     public void setClient(Client client) {
         this.client = client;
-    }
-
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
     }
 }

@@ -18,8 +18,6 @@ import java.util.*;
 @RequestMapping("/api")
 public class CoordinatesController {
     @Autowired
-    CardRepository cardRepository;
-    @Autowired
     ClientRepository clientRepository;
 
     @Autowired
@@ -28,18 +26,21 @@ public class CoordinatesController {
     @RequestMapping(path = "/clients/current/coordinates", method = RequestMethod.POST)
     public ResponseEntity<Object> nuevaCoordenadas(@RequestParam Long id,Authentication authentication){
         Client currentClient = clientRepository.findByeMail(authentication.getName()).orElse(null);
-        Card card = cardRepository.findById(id).get();
-        if(card.getClient().getId() != currentClient.getId()){
-            return new ResponseEntity<>("Tarjeta no asociada al cliente identificado", HttpStatus.FORBIDDEN);
+        if(currentClient == null){
+            return new ResponseEntity<>("Cliente no autentificado", HttpStatus.FORBIDDEN);
         }
         Coordinates coordinates = new Coordinates(generarValores());
+        coordinates.setClient(currentClient);
+        currentClient.setCoordinates(coordinates);
+
         coordinatesRepository.save(coordinates);
-        cardRepository.save(card);
+
+        clientRepository.save(currentClient);
         return new ResponseEntity<>("Coordenadas Creada.", HttpStatus.CREATED);
     }
 
-    private Map<String, String> generarValores(){
-        Map<String, String> values = new HashMap<>();
+    private HashMap<String, String> generarValores(){
+        HashMap<String, String> values = new HashMap<>();
         Random random = new Random();
         int columns = 0;
         String rows = "";

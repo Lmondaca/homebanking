@@ -2,11 +2,10 @@ package com.mindhub.homebanking.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Map;
+import javax.persistence.*;
+import java.util.HashMap;
 
+@Entity
 public class Coordinates {
 
     @Id
@@ -14,14 +13,16 @@ public class Coordinates {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    private Map<String,String> values;
+    @OneToOne(mappedBy = "coordinates")
+    private Client client;
+    private HashMap<String,String> valuesCard;
 
     public Coordinates (){
 
     }
 
-    public Coordinates (Map<String,String> values){
-        this.values = values;
+    public Coordinates (HashMap<String,String> valuesCard){
+        this.valuesCard = valuesCard;
     }
 
     public long getId() {
@@ -32,11 +33,19 @@ public class Coordinates {
         this.id = id;
     }
 
-    public Map<String, String> getValues() {
-        return values;
+    public HashMap<String, String> getValuesCard() {
+        return valuesCard;
     }
 
-    public void setValues(Map<String, String> values) {
-        this.values = values;
+    public void setValuesCard(HashMap<String, String> values) {
+        this.valuesCard = valuesCard;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

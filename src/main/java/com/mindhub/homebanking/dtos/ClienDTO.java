@@ -1,13 +1,11 @@
 package com.mindhub.homebanking.dtos;
 
-import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 public class ClienDTO {
     private long id;
@@ -20,6 +18,8 @@ public class ClienDTO {
     private Set<ClientLoanDTO> loans;
     private Set<CardDTO> cards;
 
+    private Set<String> coordinates;
+
     public ClienDTO(Client client) {
         this.id = client.getId();
 
@@ -31,6 +31,7 @@ public class ClienDTO {
         this.accounts = client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toSet());
         this.loans = client.getClientLoans().stream().map(ClientLoanDTO::new).collect(Collectors.toSet());
         this.cards = client.getCards().stream().map(CardDTO::new).collect(Collectors.toSet());
+        this.coordinates = valoresCoordenadas(client.getCoordinates().getValuesCard());
     }
 
     public long getId() {
@@ -88,4 +89,24 @@ public class ClienDTO {
     public void setCards(Set<CardDTO> cards) {
         this.cards = cards;
     }
+
+    public Set<String> getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Set<String> coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public Set<String> valoresCoordenadas(HashMap<String, String> valuesCard){
+        Set<String> valores = new TreeSet<>();
+        int i=1;
+        for(i=1; i<4;i++){
+            valores.add(valuesCard.get("A"+i));
+            valores.add(valuesCard.get("B"+i));
+            valores.add(valuesCard.get("C"+i));
+        }
+        return valores;
+    }
+
 }
