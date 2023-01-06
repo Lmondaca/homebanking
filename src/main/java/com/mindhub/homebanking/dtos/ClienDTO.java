@@ -12,6 +12,11 @@ public class ClienDTO {
     private String firstName;
     private String lastName;
     private String eMail;
+    private String phone;
+    private String address;
+    private String maritalStatus;
+    private String company;
+    private String password;
 
     private Set<AccountDTO> accounts;
 
@@ -22,12 +27,14 @@ public class ClienDTO {
 
     public ClienDTO(Client client) {
         this.id = client.getId();
-
         this.firstName = client.getFirstName();
-
         this.lastName = client.getLastName();
-
         this.eMail = client.geteMail();
+        this.phone = client.getPhone();
+        this.address = client.getAddress();
+        this.maritalStatus = client.getMaritalStatus();
+        this.company = client.getCompany();
+        this.password = client.getPassword();
         this.accounts = client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toSet());
         this.loans = client.getClientLoans().stream().map(ClientLoanDTO::new).collect(Collectors.toSet());
         this.cards = client.getCards().stream().map(CardDTO::new).collect(Collectors.toSet());
@@ -64,6 +71,46 @@ public class ClienDTO {
 
     public void seteMail(String eMail) {
         this.eMail = eMail;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Set<AccountDTO> getAccounts() {

@@ -1,6 +1,5 @@
 package com.mindhub.homebanking.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import org.hibernate.annotations.GenericGenerator;
@@ -10,6 +9,10 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+/*EDIT 2023-01-04
+- Se agrega nuevo atributo ENUM
+- Se crea nuevo constructor para aceptar el nuevo atributo y se mantiene el anterior con el tipo de cuenta a CORRIENTE por defecto.
+* */
 @Entity
 public class Account {
     @Id
@@ -24,7 +27,9 @@ public class Account {
     private Client client;
 
     @OneToMany(mappedBy="account", fetch=FetchType.EAGER)
-    private Set<Transaction> transactions = new HashSet<>();;
+    private Set<Transaction> transactions = new HashSet<>();
+    private AccountType accountType;
+    private int girosPorAnno;
 
 
     public Account() {
@@ -34,6 +39,16 @@ public class Account {
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
+        this.accountType = AccountType.CORRIENTE;
+        this.girosPorAnno = -1;
+    }
+
+    public Account(String number, LocalDateTime creationDate, double balance, AccountType accountType) {
+        this.number = number;
+        this.creationDate = creationDate;
+        this.balance = balance;
+        this.accountType = accountType;
+        this.girosPorAnno = 3;
     }
 
     public long getId() {
@@ -78,6 +93,22 @@ public class Account {
 
     public Set<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public int getGirosPorAnno() {
+        return girosPorAnno;
+    }
+
+    public void setGirosPorAnno(int girosPorAnno) {
+        this.girosPorAnno = girosPorAnno;
     }
 
     public void setTransactions(Transaction transaction) {
