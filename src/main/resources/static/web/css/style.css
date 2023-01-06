@@ -1,5 +1,10 @@
-.account{
+.accountCorriente{
     background: linear-gradient(45deg,#ee0979,#ff6a00);
+    color: white;
+    box-shadow: 1px 1px 5px black;
+}
+.accountAhorro{
+    background: linear-gradient(45deg,#0e1f9b,#05f322);
     color: white;
     box-shadow: 1px 1px 5px black;
 }
