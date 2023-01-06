@@ -170,14 +170,6 @@ public class Client {
         return firstName + " " + lastName;
     }
 
-    public void setAccounts(Set<Account> accounts) {
-        this.accounts = accounts;
-    }
-
-    public void setClientLoans(Set<ClientLoan> clientLoans) {
-        this.clientLoans = clientLoans;
-    }
-
     public Coordinates getCoordinates() {
         return coordinates;
     }

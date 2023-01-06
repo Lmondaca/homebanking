@@ -54,7 +54,7 @@ var app = new Vue({
                     'content-type': 'application/x-www-form-urlencoded'
                 }
             }
-            axios.post('/api/clients/update?id='+id+'&phone='+this.phone+'&address='+this.address+'&maritalStatus='+this.maritalStatus+'&company='+this.company,config)
+            axios.post('/api/clients/update?id='+id+'&phone='+this.phone+'&address='+encodeURIComponent(this.address)+'&maritalStatus='+this.maritalStatus+'&company='+this.company,config)
                 .then(response => {
                     this.modal.hide();
                     this.okmodal.show();
