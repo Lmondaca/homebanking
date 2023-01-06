@@ -2,6 +2,8 @@ var app = new Vue({
     el:"#app",
     data:{
         clientInfo: {},
+        accountCorriente: [],
+        accountAhorro: [],
         errorToats: null,
         errorMsg: null,
     },
@@ -11,6 +13,8 @@ var app = new Vue({
                 .then((response) => {
                     //get client ifo
                     this.clientInfo = response.data;
+                    this.accountCorriente = this.clientInfo.accounts.filter(account => account.accountType == "CORRIENTE");
+                    this.accountAhorro = this.clientInfo.accounts.filter(account => account.accountType == "AHORRO");
                 })
                 .catch((error)=>{
                     // handle error
@@ -29,8 +33,26 @@ var app = new Vue({
                     this.errorToats.show();
                 })
         },
-        create: function(){
-            axios.post("/api/clients/current/accounts")
+        createCorriente: function(){
+            let config = {
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                }
+            }
+            axios.post(`/api/clients/current/accounts?accountType=${"CORRIENTE"}`,config)
+                .then(response => window.location.reload())
+                .catch((error) =>{
+                    this.errorMsg = error.response.data;
+                    this.errorToats.show();
+                })
+        },
+        createAhorro: function(){
+            let config = {
+                headers: {
+                     'content-type': 'application/x-www-form-urlencoded'
+                }
+            }
+            axios.post(`/api/clients/current/accounts?accountType=${"AHORRO"}`,config)
                 .then(response => window.location.reload())
                 .catch((error) =>{
                     this.errorMsg = error.response.data;
