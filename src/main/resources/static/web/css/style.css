@@ -49,7 +49,7 @@
 }
 
 .menu-logo{
-    width: 150px;
+    width: 100px;
     height: 40px;
 }
 
@@ -69,4 +69,9 @@
 
 .index-container{
     margin-top: 10%;
+}
+
+.textArea{
+    height: 20px;
+    resize: none;
 }

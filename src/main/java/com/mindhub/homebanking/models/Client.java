@@ -18,6 +18,10 @@ public class Client {
     private String firstName;
     private String lastName;
     private String eMail;
+    private String phone;
+    private String address;
+    private String maritalStatus;
+    private String company;
     private String password;
 
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
@@ -29,13 +33,22 @@ public class Client {
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "coordinates_id", referencedColumnName = "id")
+    private Coordinates coordinates;
+
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String eMail, String password) {
+    public Client(String firstName, String lastName, String eMail, String phone, String address, String maritalStatus,
+                  String company, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMail = eMail;
+        this.phone = phone;
+        this.address = address;
+        this.maritalStatus = maritalStatus;
+        this.company = company;
         this.password = password;
     }
 
@@ -88,6 +101,46 @@ public class Client {
         this.password = password;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public void setClientLoans(Set<ClientLoan> clientLoans) {
+        this.clientLoans = clientLoans;
+    }
+
     @JsonIgnore
     public List<Loan> getLoans(){
         return this.clientLoans.stream().map(loan -> loan.getLoan()).collect(Collectors.toList());
@@ -115,5 +168,21 @@ public class Client {
     }
     public String toString() {
         return firstName + " " + lastName;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public void setClientLoans(Set<ClientLoan> clientLoans) {
+        this.clientLoans = clientLoans;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 }

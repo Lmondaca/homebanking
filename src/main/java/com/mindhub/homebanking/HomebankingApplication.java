@@ -13,7 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @SpringBootApplication
 @EnableScheduling
@@ -26,13 +29,21 @@ public class HomebankingApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(ClientRepository repository, AccountRepository repository2, TransactionRepository repository3, LoanRepository repository4, ClientLoanRepository repository5, CardRepository repository6) {
+	public CommandLineRunner initData(ClientRepository repository, AccountRepository repository2,
+									  TransactionRepository repository3, LoanRepository repository4,
+									  ClientLoanRepository repository5, CardRepository repository6,
+                    CoordinatesRepository coordinatesRepository) {
 		return (args) -> {
 			// save a couple of customers
-			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com", passwordEnconder.encode("12345"));
+			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com", "56943856103",
+					"Av. NoExiste #1234", "Casada", "EmpresaCo", passwordEnconder.encode("12345"));
+
 			Account account1 = new Account("VIN001", LocalDateTime.now(), 5000.0);
 			Account account2 = new Account("VIN002", LocalDateTime.now().plusDays(1), 7500.0);
-			Client client2 = new Client("Carlos", "Gaaaawar", "Pater@mindhub.com", passwordEnconder.encode("12344"));
+
+			Client client2 = new Client("Carlos", "Gaaaawar", "Pater@mindhub.com", "56990023745",
+					"Pj. OtraDimension #1002", "Soltero", "EmpresaSPA", passwordEnconder.encode("12344"));
+
 			Transaction trx1 = new Transaction(TransactionType.CREDITO, 1093.0, "DepositoC11", LocalDateTime.now());
 			Transaction trx2 = new Transaction(TransactionType.DEBITO, 1562.0, "CompraC11", LocalDateTime.now());
 			Transaction trx3 = new Transaction(TransactionType.CREDITO, 5381.0, "DepositoC21", LocalDateTime.now());
@@ -50,7 +61,21 @@ public class HomebankingApplication {
 			Card card2 = new Card("MELBA MOREL", CardType.CREDIT, CardColor.TITANIUM, "9420-1912-0920-9831", 412, LocalDateTime.now(), LocalDateTime.now().plusYears(5) );
 			Card card3 = new Card("CARLOS GAAAAWAR", CardType.CREDIT, CardColor.SILVER, "9420-1913-0910-6445", 521, LocalDateTime.now(), LocalDateTime.now().plusYears(5) );
 
-			Client client3 = new Client("admin", "Barato", "hol@fad.com", passwordEnconder.encode("adm123"));
+			Client client3 = new Client("admin", "Barato", "hol@fad.com", "56987542622",
+					"Elm Street #2215", "Viudo", "BusinessCo", passwordEnconder.encode("adm123"));
+
+			Coordinates coordinates1 = new Coordinates(generarValores());
+			Coordinates coordinates2 = new Coordinates(generarValores());
+			Coordinates coordinates3 = new Coordinates(generarValores());
+
+			coordinates1.setClient(client1);
+			coordinates2.setClient(client2);
+			coordinates3.setClient(client3);
+
+			client1.setCoordinates(coordinates1);
+			client2.setCoordinates(coordinates2);
+			client3.setCoordinates(coordinates3);
+
 			repository6.save(card1);
 			repository6.save(card2);
 			repository6.save(card3);
@@ -128,7 +153,35 @@ public class HomebankingApplication {
 			repository2.save(account2);
 			repository2.save(account3);
 
+			coordinatesRepository.save(coordinates1);
+			coordinatesRepository.save(coordinates2);
+			coordinatesRepository.save(coordinates3);
+
 		};
+	}
+
+	private HashMap<String, String> generarValores(){
+		HashMap<String, String> values = new HashMap<>();
+		Random random = new Random();
+		int columns = 0;
+		String rows = "";
+		for(int ia=0; ia<3;ia++){
+			columns = random.nextInt(99);
+			rows = "A"+(ia+1);
+			values.put(rows,String.format("%02d", columns));
+		}
+		for(int ib=0; ib<3;ib++){
+			columns = random.nextInt(99);
+			rows = "B"+(ib+1);
+			values.put(rows,String.format("%02d", columns));
+		}
+		for(int ic=0; ic<3;ic++){
+			columns = random.nextInt(99);
+			rows = "C"+(ic+1);
+			values.put(rows,String.format("%02d", columns));
+		}
+
+		return values;
 	}
 
 
