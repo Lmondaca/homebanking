@@ -33,6 +33,10 @@ public class Client {
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "coordinates_id", referencedColumnName = "id")
+    private Coordinates coordinates;
+
     public Client() {
     }
 
@@ -164,5 +168,13 @@ public class Client {
     }
     public String toString() {
         return firstName + " " + lastName;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 }

@@ -1,10 +1,10 @@
 .accountCorriente{
-    background: linear-gradient(45deg,#ee0979,#ff6a00);
+    background: linear-gradient(60deg,#3349FF,#3FFF33);
     color: white;
     box-shadow: 1px 1px 5px black;
 }
 .accountAhorro{
-    background: linear-gradient(45deg,#0e1f9b,#05f322);
+    background: linear-gradient(60deg,#3349FF,#3FFF33);
     color: white;
     box-shadow: 1px 1px 5px black;
 }
@@ -44,7 +44,7 @@
 }
 
 .loan{
-    background: linear-gradient(45deg,#ee09cf,#0026ff);
+    background: linear-gradient(60deg,#3FFF33,#3349FF);
     color: white;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .welcome{
-    background: linear-gradient(45deg,#ee0979,#ff6a00);
+    background: linear-gradient(45deg,#3349FF,#3FFF33);
 }
 
 .welcome-logo{
@@ -62,7 +62,7 @@
 }
 
 .index-body{
-    background-image: url(../img/avila.jpg);
+    background-image: url(../img/Java_Desktop.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
