@@ -13,7 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @SpringBootApplication
 @EnableScheduling
@@ -28,7 +31,8 @@ public class HomebankingApplication {
 	@Bean
 	public CommandLineRunner initData(ClientRepository repository, AccountRepository repository2,
 									  TransactionRepository repository3, LoanRepository repository4,
-									  ClientLoanRepository repository5, CardRepository repository6) {
+									  ClientLoanRepository repository5, CardRepository repository6,
+                    CoordinatesRepository coordinatesRepository) {
 		return (args) -> {
 			// save a couple of customers
 			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com", "56943856103",
@@ -59,6 +63,18 @@ public class HomebankingApplication {
 
 			Client client3 = new Client("admin", "Barato", "hol@fad.com", "56987542622",
 					"Elm Street #2215", "Viudo", "BusinessCo", passwordEnconder.encode("adm123"));
+
+			Coordinates coordinates1 = new Coordinates(generarValores());
+			Coordinates coordinates2 = new Coordinates(generarValores());
+			Coordinates coordinates3 = new Coordinates(generarValores());
+
+			coordinates1.setClient(client1);
+			coordinates2.setClient(client2);
+			coordinates3.setClient(client3);
+
+			client1.setCoordinates(coordinates1);
+			client2.setCoordinates(coordinates2);
+			client3.setCoordinates(coordinates3);
 
 			repository6.save(card1);
 			repository6.save(card2);
@@ -137,7 +153,35 @@ public class HomebankingApplication {
 			repository2.save(account2);
 			repository2.save(account3);
 
+			coordinatesRepository.save(coordinates1);
+			coordinatesRepository.save(coordinates2);
+			coordinatesRepository.save(coordinates3);
+
 		};
+	}
+
+	private HashMap<String, String> generarValores(){
+		HashMap<String, String> values = new HashMap<>();
+		Random random = new Random();
+		int columns = 0;
+		String rows = "";
+		for(int ia=0; ia<3;ia++){
+			columns = random.nextInt(99);
+			rows = "A"+(ia+1);
+			values.put(rows,String.format("%02d", columns));
+		}
+		for(int ib=0; ib<3;ib++){
+			columns = random.nextInt(99);
+			rows = "B"+(ib+1);
+			values.put(rows,String.format("%02d", columns));
+		}
+		for(int ic=0; ic<3;ic++){
+			columns = random.nextInt(99);
+			rows = "C"+(ic+1);
+			values.put(rows,String.format("%02d", columns));
+		}
+
+		return values;
 	}
 
 
