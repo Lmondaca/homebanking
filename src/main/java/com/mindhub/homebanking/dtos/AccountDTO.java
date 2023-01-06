@@ -1,11 +1,15 @@
 package com.mindhub.homebanking.dtos;
 
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/*EDIT 2023/01/04
+ - Se agrega nuevo atributo: tipo de cuenta ENUM
+ */
 public class AccountDTO {
     private long id;
     private String number;
@@ -13,6 +17,8 @@ public class AccountDTO {
     private double balance;
 
     private Set<TransactionDTO> transactions;
+    private AccountType accountType;
+    private int girosPorAnno;
 
     public AccountDTO(Account account) {
         this.id = account.getId();
@@ -20,6 +26,8 @@ public class AccountDTO {
         this.creationDate = account.getCreationDate();
         this.balance = account.getBalance();
         this.transactions = account.getTransactions().stream().map(TransactionDTO::new).collect(Collectors.toSet());
+        this.accountType = account.getAccountType();
+        this.girosPorAnno = account.getGirosPorAnno();
     }
 
     public long getId() {
@@ -60,5 +68,21 @@ public class AccountDTO {
 
     public void setTransactions(Set<TransactionDTO> transactions) {
         this.transactions = transactions;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public int getGirosPorAnno() {
+        return girosPorAnno;
+    }
+
+    public void setGirosPorAnno(int girosPorAnno) {
+        this.girosPorAnno = girosPorAnno;
     }
 }

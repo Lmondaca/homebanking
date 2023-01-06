@@ -75,14 +75,19 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col">
-                        <h2 class="display-6 subtitle">Cuentas</h2>
-                        <button v-if="clientInfo.accounts != null && clientInfo.accounts.length < 3" v-on:click="create" id="create" class="btn btn-sm btn-outline-success">Create</button>
+                        <h2 class="display-4 subtitle">Cuentas</h2>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <h2 class="display-6 subtitle">Cuentas Corrientes</h2>
+                        <button v-if="accountCorriente != null && accountCorriente.length < 3" v-on:click="createCorriente" id="createCorriente" class="btn btn-sm btn-outline-success">Create</button>
                     </div>
                 </div>
                 <div class="row">
-                    <div v-for="account in clientInfo.accounts" class="col-12 col-md-3 mt-2">
+                    <div v-for="account in accountCorriente" class="col-12 col-md-3 mt-2">
                         <a class="account-link" v-bind:href="'http://localhost:8080/web/account.html?id='+account.id">
-                            <div class="card border-0 account">
+                            <div class="card border-0 accountCorriente">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ account.number }}</h5>
                                     <p class="card-text"> {{ formatDate(account.creationDate) }}</p>
@@ -94,7 +99,26 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col">
-                        <h2 class="display-6">Loans</h2>
+                        <h2 class="display-6 subtitle">Cuentas Ahorro</h2>
+                        <button v-if="accountAhorro != null && accountAhorro.length < 3" v-on:click="createAhorro" id="createAhorro" class="btn btn-sm btn-outline-success">Create</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div v-for="account in accountAhorro" class="col-12 col-md-3 mt-2">
+                        <a class="account-link" v-bind:href="'http://localhost:8080/web/account.html?id='+account.id">
+                            <div class="card border-0 accountAhorro">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ account.number }}</h5>
+                                    <p class="card-text"> {{ formatDate(account.creationDate) }}</p>
+                                    <p class="text-center lead account-balance"> ${{ account.balance }} </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <h2 class="display-4">Loans</h2>
                         <span class="small" v-if="clientInfo.loan != null && clientInfo.loans.length <= 0">No loans</span>
                     </div>
                 </div>

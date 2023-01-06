@@ -75,7 +75,9 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col">
-                            <h2 class="display-6 account">Account Number: {{ accountInfo.number }} - Balance: ${{ accountInfo.balance }}</h2>
+                            <h2 class="display-6 ">Account Type: {{ accountInfo.accountType }} </h2>
+                            <h2 class="display-6 accountCorriente">Account Number: {{ accountInfo.number }} - Balance: ${{ accountInfo.balance }}</h2>
+                            <h2 v-if="accountInfo.accountType == 'AHORRO' " class="display-6 accountAhorro">Giros Restantes: {{ accountInfo.girosPorAnno }}</h2>
                         </div>
                     </div>
                     <div class="row mt-3">
