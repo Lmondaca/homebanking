@@ -19,13 +19,13 @@ import java.util.Random;
 @SpringBootApplication
 @EnableScheduling
 public class HomebankingApplication {
-/*	@Autowired
-	private PasswordEncoder passwordEnconder;*/
+	@Autowired
+	private PasswordEncoder passwordEnconder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
-/*
+
 	@Bean
 	public CommandLineRunner initData(ClientRepository repository, AccountRepository repository2,
 									  TransactionRepository repository3, LoanRepository repository4,
@@ -156,7 +156,7 @@ public class HomebankingApplication {
 			coordinateRepository.save(coordinate3);
 
 		};
-	}*/
+	}
 
 	private HashMap<String, String> generarValores(){
 		HashMap<String, String> values = new HashMap<>();
