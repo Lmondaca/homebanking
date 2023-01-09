@@ -30,7 +30,7 @@ public class HomebankingApplication {
 	public CommandLineRunner initData(ClientRepository repository, AccountRepository repository2,
 									  TransactionRepository repository3, LoanRepository repository4,
 									  ClientLoanRepository repository5, CardRepository repository6,
-                    CoordinatesRepository coordinatesRepository) {
+                    CoordinateRepository coordinateRepository) {
 		return (args) -> {
 			// save a couple of customers
 			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com", "56943856103",
@@ -151,9 +151,9 @@ public class HomebankingApplication {
 			repository2.save(account2);
 			repository2.save(account3);
 
-			coordinatesRepository.save(coordinate1);
-			coordinatesRepository.save(coordinate2);
-			coordinatesRepository.save(coordinate3);
+			coordinateRepository.save(coordinate1);
+			coordinateRepository.save(coordinate2);
+			coordinateRepository.save(coordinate3);
 
 		};
 	}
