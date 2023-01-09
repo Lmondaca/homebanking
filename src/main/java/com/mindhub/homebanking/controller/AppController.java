@@ -2,6 +2,7 @@ package com.mindhub.homebanking.controller;
 
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
+import com.mindhub.homebanking.models.Coordinate;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Random;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -42,6 +45,8 @@ public class AppController {
         int numeroCuenta = (int) (Math.random()*99999999.0);
         String numeroCuntaStr = String.format("%08d", numeroCuenta);
 
+        nuevoClien.setCoordinates(new Coordinate(generarValores()));
+
         String cuenta = "VIN-"+ numeroCuntaStr;
         Account nuevaAccount = new Account(cuenta, LocalDateTime.now(), 0.0);
         accountRepository.save(nuevaAccount);
@@ -49,5 +54,29 @@ public class AppController {
         clientRepository.save(nuevoClien);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    private HashMap<String, String> generarValores(){
+        HashMap<String, String> values = new HashMap<>();
+        Random random = new Random();
+        int columns = 0;
+        String rows = "";
+        for(int ia=0; ia<3;ia++){
+            columns = random.nextInt(99);
+            rows = "A"+(ia+1);
+            values.put(rows,String.format("%02d", columns));
+        }
+        for(int ib=0; ib<3;ib++){
+            columns = random.nextInt(99);
+            rows = "B"+(ib+1);
+            values.put(rows,String.format("%02d", columns));
+        }
+        for(int ic=0; ic<3;ic++){
+            columns = random.nextInt(99);
+            rows = "C"+(ic+1);
+            values.put(rows,String.format("%02d", columns));
+        }
+
+        return values;
     }
 }

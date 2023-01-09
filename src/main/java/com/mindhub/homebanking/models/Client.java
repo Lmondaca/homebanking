@@ -34,8 +34,8 @@ public class Client {
     private Set<Card> cards = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "coordinates_id", referencedColumnName = "id")
-    private Coordinates coordinates;
+    @JoinColumn(name = "coordinate_id", referencedColumnName = "id")
+    private Coordinate coordinate;
 
     public Client() {
     }
@@ -171,11 +171,11 @@ public class Client {
     }
 
 
-    public Coordinates getCoordinates() {
-        return coordinates;
+    public Coordinate getCoordinates() {
+        return coordinate;
     }
 
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
+    public void setCoordinates(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 }

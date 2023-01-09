@@ -11,14 +11,24 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+
+@AutoConfigureTestDatabase(replace = NONE)
+
 public class RepositoriesTest {
+
+
+
     @Autowired
+
     LoanRepository loanRepository;
 
+
+
     @Test
+
     public void existLoans(){
 
         List<Loan> loans = loanRepository.findAll();
@@ -26,7 +36,11 @@ public class RepositoriesTest {
         assertThat(loans,is(not(empty())));
 
     }
+
+
+
     @Test
+
     public void existPersonalLoan(){
 
         List<Loan> loans = loanRepository.findAll();
@@ -34,4 +48,7 @@ public class RepositoriesTest {
         assertThat(loans, hasItem(hasProperty("name", is("Personal"))));
 
     }
+
+
+
 }

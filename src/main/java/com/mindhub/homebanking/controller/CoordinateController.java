@@ -1,27 +1,24 @@
 package com.mindhub.homebanking.controller;
 
 import com.mindhub.homebanking.models.*;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.CardRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.CoordinatesRepository;
+import com.mindhub.homebanking.repositories.CoordinateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
 @RequestMapping("/api")
-public class CoordinatesController {
+public class CoordinateController {
     @Autowired
     ClientRepository clientRepository;
 
     @Autowired
-    CoordinatesRepository coordinatesRepository;
+    CoordinateRepository coordinateRepository;
 
     @RequestMapping(path = "/clients/current/coordinates", method = RequestMethod.POST)
     public ResponseEntity<Object> nuevaCoordenadas(@RequestParam Long id,Authentication authentication){
@@ -29,11 +26,11 @@ public class CoordinatesController {
         if(currentClient == null){
             return new ResponseEntity<>("Cliente no autentificado", HttpStatus.FORBIDDEN);
         }
-        Coordinates coordinates = new Coordinates(generarValores());
-        coordinates.setClient(currentClient);
-        currentClient.setCoordinates(coordinates);
+        Coordinate coordinate = new Coordinate(generarValores());
+        coordinate.setClient(currentClient);
+        currentClient.setCoordinates(coordinate);
 
-        coordinatesRepository.save(coordinates);
+        coordinateRepository.save(coordinate);
 
         clientRepository.save(currentClient);
         return new ResponseEntity<>("Coordenadas Creada.", HttpStatus.CREATED);
