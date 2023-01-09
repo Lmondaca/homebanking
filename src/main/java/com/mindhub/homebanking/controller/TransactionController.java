@@ -114,10 +114,9 @@ public class TransactionController {
             accountCredited.setBalance(accountCredited.getBalance() + amountCredit);
     }
     //@Scheduled(cron = "0 0 9 L * ? * ")
-    @Scheduled(cron = "0/60 * * ? * *")
+    @Scheduled(cron = "0 * * ? * *")
     public void ahorroAccount(){
         List<Account> listaAccountAhorro = accountRepository.findByAccountType(AccountType.AHORRO);
-        System.out.println("Entro a la tarea programada");
         for (Account cuentaAhorro :
                 listaAccountAhorro) {
             if (cuentaAhorro.getBalance() >= 5000.0) {
@@ -135,7 +134,7 @@ public class TransactionController {
         transactionRepository.save(trxCredit);
     }
     //@Scheduled(cron = "0 0 0 1 JAN ?")
-    @Scheduled(cron = "0 * * ? * *")
+    @Scheduled(cron = "0 0/3 * ? * *")
     public void giroPorAnnoRes(){
         List<Account> listaAccountAhorro = accountRepository.findByAccountType(AccountType.AHORRO);
         for (Account cuentaAhorro :
@@ -143,7 +142,6 @@ public class TransactionController {
             cuentaAhorro.setGirosPorAnno(3);
             accountRepository.save(cuentaAhorro);
         }
-        System.out.println("Se reseteo la cantidad de giros");
 
     }
 }
