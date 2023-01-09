@@ -170,6 +170,7 @@ public class Client {
         return firstName + " " + lastName;
     }
 
+
     public Coordinates getCoordinates() {
         return coordinates;
     }
