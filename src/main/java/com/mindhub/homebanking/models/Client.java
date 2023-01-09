@@ -35,7 +35,7 @@ public class Client {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "coordinates_id", referencedColumnName = "id")
-    private Coordinates coordinates;
+    private Coordinate coordinate;
 
     public Client() {
     }
@@ -171,11 +171,11 @@ public class Client {
     }
 
 
-    public Coordinates getCoordinates() {
-        return coordinates;
+    public Coordinate getCoordinates() {
+        return coordinate;
     }
 
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
+    public void setCoordinates(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 }

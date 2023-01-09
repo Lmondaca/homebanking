@@ -11,11 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 @SpringBootApplication
@@ -64,17 +62,17 @@ public class HomebankingApplication {
 			Client client3 = new Client("admin", "Barato", "hol@fad.com", "56987542622",
 					"Elm Street #2215", "Viudo", "BusinessCo", passwordEnconder.encode("adm123"));
 
-			Coordinates coordinates1 = new Coordinates(generarValores());
-			Coordinates coordinates2 = new Coordinates(generarValores());
-			Coordinates coordinates3 = new Coordinates(generarValores());
+			Coordinate coordinate1 = new Coordinate(generarValores());
+			Coordinate coordinate2 = new Coordinate(generarValores());
+			Coordinate coordinate3 = new Coordinate(generarValores());
 
-			coordinates1.setClient(client1);
-			coordinates2.setClient(client2);
-			coordinates3.setClient(client3);
+			coordinate1.setClient(client1);
+			coordinate2.setClient(client2);
+			coordinate3.setClient(client3);
 
-			client1.setCoordinates(coordinates1);
-			client2.setCoordinates(coordinates2);
-			client3.setCoordinates(coordinates3);
+			client1.setCoordinates(coordinate1);
+			client2.setCoordinates(coordinate2);
+			client3.setCoordinates(coordinate3);
 
 			repository6.save(card1);
 			repository6.save(card2);
@@ -153,9 +151,9 @@ public class HomebankingApplication {
 			repository2.save(account2);
 			repository2.save(account3);
 
-			coordinatesRepository.save(coordinates1);
-			coordinatesRepository.save(coordinates2);
-			coordinatesRepository.save(coordinates3);
+			coordinatesRepository.save(coordinate1);
+			coordinatesRepository.save(coordinate2);
+			coordinatesRepository.save(coordinate3);
 
 		};
 	}

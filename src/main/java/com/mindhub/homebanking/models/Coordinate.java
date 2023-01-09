@@ -6,22 +6,22 @@ import javax.persistence.*;
 import java.util.HashMap;
 
 @Entity
-public class Coordinates {
+public class Coordinate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    @OneToOne(mappedBy = "coordinates")
+    @OneToOne(mappedBy = "coordinate")
     private Client client;
     private HashMap<String,String> valuesCard;
 
-    public Coordinates (){
+    public Coordinate(){
 
     }
 
-    public Coordinates (HashMap<String,String> valuesCard){
+    public Coordinate(HashMap<String,String> valuesCard){
         this.valuesCard = valuesCard;
     }
 
