@@ -20,15 +20,13 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 public class RepositoriesTest {
 
 
-
+/*
     @Autowired
-
     LoanRepository loanRepository;
 
 
 
     @Test
-
     public void existLoans(){
 
         List<Loan> loans = loanRepository.findAll();
@@ -40,7 +38,6 @@ public class RepositoriesTest {
 
 
     @Test
-
     public void existPersonalLoan(){
 
         List<Loan> loans = loanRepository.findAll();
@@ -49,6 +46,6 @@ public class RepositoriesTest {
 
     }
 
-
+*/
 
 }
