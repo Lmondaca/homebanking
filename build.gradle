@@ -7,6 +7,11 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+		classpath("org.springframework.boot:spring-boot-starter-data-rest:${springBootVersion}")
+		classpath("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+		classpath("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+		classpath("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${springBootVersion}")
+		classpath("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 	}
 }
 plugins {
