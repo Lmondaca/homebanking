@@ -1,3 +1,14 @@
+buildscript {
+	ext {
+		springBootVersion = '2.6.4'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.6.4'
@@ -11,9 +22,6 @@ sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
-	maven {
-		url = 'https://spring.io/projects/spring-boot'
-	}
 }
 jar {
 	manifest {
