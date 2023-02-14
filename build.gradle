@@ -31,7 +31,7 @@ repositories {
 jar {
 	manifest {
 		attributes(
-				'Main-Class': 'src.main.java.com.mindhub.homebanking.HomebankingApplication'
+				'Main-Class': 'com.mindhub.homebanking.HomebankingApplication'
 		)
 	}
 }
