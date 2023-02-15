@@ -16,9 +16,6 @@ repositories {
 	mavenCentral()
 }
 
-tasks.named("bootJar") {
-	mainClass = 'com.mindhub.homebanking.HomebankingApplication'
-}
 jar {
 	manifest {
 		attributes(
