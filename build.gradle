@@ -15,15 +15,17 @@ sourceCompatibility = '17'
 repositories {
 	mavenCentral()
 }
-springBoot{
+
+tasks.named("bootJar") {
 	mainClass = 'com.mindhub.homebanking.HomebankingApplication'
 }
-//jar {
-//	manifest {
-//				'Main-Class': 'com.mindhub.homebanking.HomebankingApplication'
-//		)
-//	}
-//}
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'com.mindhub.homebanking.HomebankingApplication'
+		)
+	}
+}
 bootRun {
 
 	sourceResources sourceSets.main
