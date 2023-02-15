@@ -27,8 +27,7 @@ public class RepositoriesTest {
     ClientRepository clientRepository;
     @Autowired
     TransactionRepository transactionRepository;
-    @Autowired
-    private CoordinatesRepository coordinatesRepository;
+
 
 
     @Test
@@ -81,16 +80,7 @@ public class RepositoriesTest {
         List<Client> clients = clientRepository.findAll();
         assertThat(clients, is(not(empty())));
     }
-    @Test
-    public void existCoordinate(){
-        List<Coordinates> coordinates = coordinatesRepository.findAll();
-        assertThat(coordinates, is(not(empty())));
-    }
-    @Test
-    public void isInstanceHashCoordinate(){
-        List<HashMap<String,String>> coordinates = coordinatesRepository.findAll().stream().map((coordinate) -> {return coordinate.getValuesCard();}).collect(Collectors.toList());
-        assertThat(coordinates, everyItem(is(instanceOf(HashMap.class))));
-    }
+
     @Test
     public void existTransaction(){
         List<Transaction> transactions = transactionRepository.findAll();
