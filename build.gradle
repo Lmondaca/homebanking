@@ -46,15 +46,17 @@ bootRun {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-security')
 //	implementation 'org.postgresql:postgresql'
-	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
-	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
-	runtimeOnly 'com.h2database:h2'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compile('com.fasterxml.jackson.dataformat:jackson-dataformat-xml')
+	compile(group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0')
+//	runtimeOnly 'com.h2database:h2'
+	runtime('com.h2database:h2')
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 tasks.named('test') {
