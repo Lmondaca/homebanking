@@ -11,7 +11,6 @@ RUN ./gradlew build
 RUN mkdir -p build/libs && (cd build/libs; jar -xf ./*.jar)
 
 FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/build/libs
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
